@@ -6,13 +6,27 @@ class WeatherInfo extends React.Component {
 
   getCity = (city) => {
     axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=818b740e822277fb1688acee53285bde`)
-    .then((response) => this.setState({ weatherInformation: response }))
+    .then((response) => {
+      const filteredData = this.filterData(response.data);
+      this.setState({ weatherInformation: filteredData });
+    })
     .catch((error) => window.alert(error.response.statusText));
   }
 
-  componentDidUpdate() {
-    console.log(this.state.weatherInformation);
-  }
+  // Filtering the data for useful information.
+  filterData = (data) => {
+    // Reducing the 40 3-hour interval weather information to 6 days.
+    data.list = Object.keys(data.list)
+    .filter(key => key === '0' || key % 8 === 0 || key === '39')
+    .reduce((object, currentKey, index) => ({...object, [index]: data.list[currentKey]}), {});
+    // Changing the date format
+    for (let key in data.list) {
+      if (data.list.hasOwnProperty(key)) {
+        data.list[key].dt = new Date(data.list[key].dt * 1000);
+      }
+    }
+    return data;
+  } 
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -21,10 +35,10 @@ class WeatherInfo extends React.Component {
 
   renderInput = () => {
     return (
-    <form onSubmit={this.handleSubmit}>
-      <input type="text" value={this.state.cityName} onChange={(e) => this.setState({ cityName: e.target.value })}></input>
-      <input type="submit" style={{ display: 'none' }}></input>
-    </form>
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" value={this.state.cityName} onChange={(e) => this.setState({ cityName: e.target.value })}></input>
+        <input type="submit" style={{ display: 'none' }}></input>
+      </form>
     );
   }
   
