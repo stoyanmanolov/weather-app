@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import WeatherDetail from './WeatherDetail';
 
 class WeatherInfo extends React.Component {
   state = { cityName: '', weatherInformation: null };
@@ -46,6 +47,7 @@ class WeatherInfo extends React.Component {
     return(
       <div>
         {this.renderInput()}
+        <WeatherDetail weather={this.state.weatherInformation}/>
       </div>
     );
   }
