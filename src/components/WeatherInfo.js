@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import WeatherDetail from './WeatherDetail';
+import WeatherList from './WeatherList';
 
 class WeatherInfo extends React.Component {
   state = { cityName: '', weatherInformation: null };
@@ -43,11 +44,19 @@ class WeatherInfo extends React.Component {
     );
   }
   
+  handleClick = (key) => {
+    console.log(key);
+  }
+
   render() {
     return(
       <div>
         {this.renderInput()}
-        <WeatherDetail weather={this.state.weatherInformation}/>
+        <WeatherDetail weather={this.state.weatherInformation} />
+        <WeatherList
+          weather={this.state.weatherInformation}
+          onClick={this.handleClick}
+        />
       </div>
     );
   }
