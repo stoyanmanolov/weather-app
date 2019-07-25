@@ -4,7 +4,7 @@ import WeatherDetail from './WeatherDetail';
 import WeatherList from './WeatherList';
 
 class WeatherInfo extends React.Component {
-  state = { cityName: '', weatherInformation: null };
+  state = { cityName: '', weatherInformation: null , itemKey: 0 };
 
   getCity = (city) => {
     axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=818b740e822277fb1688acee53285bde`)
@@ -45,14 +45,17 @@ class WeatherInfo extends React.Component {
   }
   
   handleClick = (key) => {
-    console.log(key);
+    this.setState({ weatherDayKey: key });
   }
 
   render() {
     return(
       <div>
         {this.renderInput()}
-        <WeatherDetail weather={this.state.weatherInformation} />
+        <WeatherDetail
+          weather={this.state.weatherInformation}
+          currentDayKey={this.state.weatherDayKey}
+        />
         <WeatherList
           weather={this.state.weatherInformation}
           onClick={this.handleClick}

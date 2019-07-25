@@ -1,14 +1,14 @@
 import React from 'react';
 
-const WeatherDetail = ({ weather }) => {
+const WeatherDetail = ({ weather , currentDayKey}) => {
   
   if (!weather) {
     return null
   }
 
   const city = `${weather.city.name}, ${weather.city.country}`;
-  const date = `${weather.list[0].dt.toLocaleDateString('default', { weekday: 'short' })} ${weather.list[0].dt.getDate()} ${weather.list[0].dt.toLocaleString('default', { month: 'long' })}`
-  const temperature = weather.list[0].main.temp;
+  const date = `${weather.list[currentDayKey].dt.toLocaleDateString('default', { weekday: 'short' })} ${weather.list[0].dt.getDate()} ${weather.list[0].dt.toLocaleString('default', { month: 'long' })}`
+  const temperature = weather.list[currentDayKey].main.temp;
 
   return (
     <div>
@@ -19,5 +19,9 @@ const WeatherDetail = ({ weather }) => {
     </div>
   );
 }
+
+WeatherDetail.defaultProps = {
+  currentDayKey: 0
+};
 
 export default WeatherDetail;
