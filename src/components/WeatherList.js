@@ -24,7 +24,7 @@ const WeatherList = ({ weather , onClick }) => {
     return null;
   }
   return (
-    <div>
+    <div className="weather-list">
       <ul>
         {listItems(weather.list)}
       </ul>

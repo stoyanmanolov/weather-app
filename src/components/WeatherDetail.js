@@ -11,7 +11,7 @@ const WeatherDetail = ({ weather , currentDayKey}) => {
   const temperature = `${weather.list[currentDayKey].main.temp.toPrecision(2)}°`;
 
   return (
-    <div>
+    <div className="weather-detail">
       <h1>{city}</h1>
       <h3>{date}</h3>
       <h2>{temperature}</h2>
