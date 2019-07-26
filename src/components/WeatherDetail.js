@@ -15,7 +15,6 @@ const WeatherDetail = ({ weather , currentDayKey}) => {
       <h1>{city}</h1>
       <h3>{date}</h3>
       <h2>{temperature}</h2>
-      <img src={`http://openweathermap.org/img/w/${weather.list[0].weather[0].icon}.png`} alt="weatherIcon"></img>
     </div>
   );
 }
