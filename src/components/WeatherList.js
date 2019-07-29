@@ -6,11 +6,7 @@ const WeatherList = ({ weather , onClick }) => {
 
   const listItems = (list) => {
     return Object.keys(list).map((key) =>
-<<<<<<< HEAD
     <li style={ stateKey === key ? { backgroundColor: 'lightgrey' } : null } onClick={() => {
-=======
-    <li style={ stateKey == key ? { backgroundColor: 'lightgrey' } : null } onClick={() => {
->>>>>>> Adding hooks for styling weather items onClick
       setStateKey(key);
       onClick(key);
     }} key={key}>
