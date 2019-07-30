@@ -4,7 +4,7 @@ import WeatherDetail from './WeatherDetail';
 import WeatherList from './WeatherList';
 
 class WeatherInfo extends React.Component {
-  state = { cityName: '', weatherInformation: null , itemKey: 0 };
+  state = { cityName: '', weatherInformation: null , weatherDayKey: '0' };
 
   getCity = (city) => {
     axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=818b740e822277fb1688acee53285bde`)

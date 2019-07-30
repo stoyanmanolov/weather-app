@@ -10,7 +10,12 @@ const WeatherList = ({ weather , onClick }) => {
       setStateKey(key);
       onClick(key);
     }} key={key}>
-      <p>{list[key].dt.toLocaleDateString('default', { weekday: 'long' })}</p>
+      {
+        key === '0' ?
+        <p>Today</p>
+        :
+        <p>{list[key].dt.toLocaleDateString('default', { weekday: 'long' })}</p>
+      }
       <img src={`http://openweathermap.org/img/w/${list[key].weather[0].icon}.png`} alt="weatherIcon"></img>
       <p>{`${list[key].main.temp.toPrecision(2)}°`}</p>
     </li>
