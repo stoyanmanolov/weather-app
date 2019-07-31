@@ -5,11 +5,14 @@
   margin: 0;
   padding: 0;
   font-family: 'Quicksand';
+  color: rgb(70, 70, 70);
 }
 
-.card-container {
+.weather-card {
   height: 100%;
   width: 100%;
+  position: relative;
+  padding: 10px;
   form {
     padding: 10px;
     input[type=text] {
@@ -42,7 +45,22 @@
           order: 1;
         }
       }
+      .clickStyle {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
+      }
     }
+  }
+  .weather-image {
+    pointer-events: none;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    filter: blur(100px);
+    transform: scale(1.1);
   }
 }
 

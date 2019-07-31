@@ -6,7 +6,7 @@ const WeatherList = ({ weather , onClick }) => {
 
   const listItems = (list) => {
     return Object.keys(list).map((key) =>
-    <li style={ stateKey === key ? { backgroundColor: 'lightgrey' } : null } onClick={() => {
+    <li className={ stateKey === key ? 'clickStyle' : null } onClick={() => {
       setStateKey(key);
       onClick(key);
     }} key={key}>

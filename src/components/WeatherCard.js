@@ -35,7 +35,7 @@ class WeatherCard extends React.Component {
 
   render() {
     return (
-      <div className="card-container">
+      <div className="weather-card">
         <WeatherInfo getWeatherDay={this.getWeatherDay} />
         {this.state.weatherDay ?
         <img className="weather-image" src={this.changeImage(this.state.weatherDay)} alt="Weather"/>
