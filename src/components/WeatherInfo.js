@@ -11,6 +11,8 @@ class WeatherInfo extends React.Component {
     .then((response) => {
       const filteredData = this.filterData(response.data);
       this.setState({ weatherInformation: filteredData });
+      // Send data to parent
+      this.props.getWeatherDay(this.state.weatherInformation.list[this.state.weatherDayKey])
     })
     .catch((error) => window.alert(error.response.statusText));
   }
@@ -46,6 +48,8 @@ class WeatherInfo extends React.Component {
   
   handleClick = (key) => {
     this.setState({ weatherDayKey: key });
+    // Send data to parent
+    this.props.getWeatherDay(this.state.weatherInformation.list[key]);
   }
 
   render() {
