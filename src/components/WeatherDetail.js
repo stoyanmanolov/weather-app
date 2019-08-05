@@ -12,9 +12,9 @@ const WeatherDetail = ({ weather , currentDayKey}) => {
 
   return (
     <div className="weather-detail">
-      <h1>{city}</h1>
-      <h3>{date}</h3>
-      <h2>{temperature}</h2>
+      <h2>{city}</h2>
+      <h4>{date}</h4>
+      <h3>{temperature}</h3>
     </div>
   );
 }

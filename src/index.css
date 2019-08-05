@@ -23,8 +23,12 @@
   width: 100%;
 }
 
+.weather-card .intro {
+  text-align: center;
+}
+
 .weather-card .weather-detail {
-  margin: 30px;
+  margin: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -37,8 +41,8 @@
           align-items: center;
 }
 
-.weather-card .weather-detail h2 {
-  font-size: 5em;
+.weather-card .weather-detail h3 {
+  font-size: 6em;
 }
 
 .weather-card .weather-list ul {

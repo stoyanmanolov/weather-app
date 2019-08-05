@@ -19,13 +19,16 @@
       width: 100%;
     }
   }
+  .intro {
+    text-align: center;
+  }
   .weather-detail {
-    margin: 30px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    h2 {
-      font-size: 5em;
+    h3 {
+      font-size: 6em;
     }
   }
   .weather-list {

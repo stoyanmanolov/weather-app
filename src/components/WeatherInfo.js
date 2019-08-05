@@ -46,6 +46,16 @@ class WeatherInfo extends React.Component {
     );
   }
   
+  renderIntroduction = () => {
+    return (
+      <div className="intro">
+        <h1>Weather App</h1>
+        <h3>Please enter a city</h3>
+        <h5>For precise search separate the city and country code with a comma. (London, UK)</h5>
+      </div>
+    );
+  }
+
   handleClick = (key) => {
     this.setState({ weatherDayKey: key });
     // Send data to parent
@@ -54,7 +64,10 @@ class WeatherInfo extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="weather-info">
+        {
+          !this.state.weatherInformation ? this.renderIntroduction() : null
+        }
         {this.renderInput()}
         <WeatherDetail
           weather={this.state.weatherInformation}
