@@ -38,10 +38,15 @@ class WeatherCard extends React.Component {
       <div className="weather-card">
         <WeatherInfo getWeatherDay={this.getWeatherDay} />
         {this.state.weatherDay ?
-        <img className="weather-image" src={this.changeImage(this.state.weatherDay)} alt="Weather"/>
+        (
+        <React.Fragment>
+          <img className="weather-image" src={this.changeImage(this.state.weatherDay)} alt="Weather"/>
+          {/* Hidden duplicate version shown only for larger screens */}
+          <img className="cardside-image" src={this.changeImage(this.state.weatherDay)} alt="Weather"/>
+        </React.Fragment>
+        )
         :
-        null
-      }
+        null}
       </div>
     );
   }

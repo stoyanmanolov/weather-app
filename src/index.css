@@ -12,7 +12,6 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 10px;
 }
 
 .weather-card form {
@@ -28,7 +27,7 @@
 }
 
 .weather-card .weather-detail {
-  margin: 20px;
+  margin: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -93,12 +92,83 @@
      object-fit: cover;
   position: absolute;
   top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   z-index: -1;
-  -webkit-filter: blur(100px);
-          filter: blur(100px);
+  -webkit-filter: blur(70px);
+          filter: blur(70px);
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.weather-card .cardside-image {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .weather-info {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .weather-info {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 992px) {
+  .weather-card {
+    padding-top: 6%;
+    padding-bottom: 6%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .weather-card .weather-info {
+    background-color: #fafafa;
+    padding: 30px 30px;
+    display: inline-block;
+  }
+  .weather-card .weather-info .weather-detail {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .weather-card .weather-info .weather-list ul {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .weather-card .weather-info .weather-list ul .clickStyle {
+    background-color: #f6f6f6;
+  }
+  .weather-card .weather-info .weather-list ul li {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .weather-card .weather-info .weather-list ul li img {
+    -webkit-box-ordinal-group: initial;
+        -ms-flex-order: initial;
+            order: initial;
+  }
+  .weather-card .weather-image {
+    height: 100vh;
+    -webkit-transform: initial;
+            transform: initial;
+  }
+  .weather-card .cardside-image {
+    -o-object-fit: cover;
+       object-fit: cover;
+    display: inline-block;
+    max-width: 20%;
+  }
 }
 /*# sourceMappingURL=index.css.map */
