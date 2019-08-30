@@ -83,16 +83,26 @@ class WeatherInfo extends React.Component {
   render() {
     return (
       <div className="weather-info">
-        {!this.state.weatherInformation ? this.renderIntroduction() : null}
-        {this.renderInput()}
-        <WeatherDetail
-          weather={this.state.weatherInformation}
-          currentDayKey={this.state.weatherDayKey}
-        />
-        <WeatherList
-          weather={this.state.weatherInformation}
-          onClick={this.handleClick}
-        />
+        {!this.state.weatherInformation ? (
+          <React.Fragment>
+            {this.renderIntroduction()}
+            {this.renderInput()}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            {this.renderInput()}
+            <WeatherDetail
+              weather={
+                this.state.weatherInformation.list[this.state.weatherDayKey]
+              }
+              city={this.state.weatherInformation.city}
+            />
+            <WeatherList
+              weather={this.state.weatherInformation}
+              onClick={this.handleClick}
+            />
+          </React.Fragment>
+        )}
       </div>
     );
   }

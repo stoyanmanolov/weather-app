@@ -24,13 +24,10 @@ const WeatherList = ({ weather, onClick }) => {
           src={`http://openweathermap.org/img/w/${list[key].weather[0].icon}.png`}
           alt="weatherIcon"
         ></img>
-        <p>{`${list[key].main.temp.toPrecision(2)}°`}</p>
+        <p>{`${Math.trunc(list[key].main.temp)}°`}</p>
       </li>
     ));
   };
-  if (!weather) {
-    return null;
-  }
   return (
     <div className="weather-list">
       <ul>{listItems(weather.list)}</ul>
