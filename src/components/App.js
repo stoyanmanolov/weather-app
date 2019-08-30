@@ -1,9 +1,9 @@
-import React from 'react';
-import WeatherCard from './WeatherCard';
+import React from "react";
+import WeatherCard from "./WeatherCard";
 
 class App extends React.Component {
   render() {
-    return(
+    return (
       <div>
         <WeatherCard />
       </div>
