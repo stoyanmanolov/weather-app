@@ -4,7 +4,7 @@ import WeatherCard from "./WeatherCard";
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <WeatherCard />
       </div>
     );
