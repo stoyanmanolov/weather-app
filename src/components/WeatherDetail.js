@@ -11,6 +11,7 @@ const WeatherDetail = ({ weather, currentDayKey }) => {
   })} ${weather.list[currentDayKey].dt.getDate()} ${weather.list[
     currentDayKey
   ].dt.toLocaleString("default", { month: "long" })}`;
+  const weatherStatus = weather.list[currentDayKey].weather[0].main;
   const temperature = `${weather.list[currentDayKey].main.temp.toPrecision(
     2
   )}°`;
@@ -19,6 +20,7 @@ const WeatherDetail = ({ weather, currentDayKey }) => {
     <div className="weather-detail">
       <h2>{city}</h2>
       <h4>{date}</h4>
+      <h4>{weatherStatus}</h4>
       <h3>{temperature}</h3>
     </div>
   );
