@@ -12,7 +12,6 @@ const WeatherDetail = ({ weather, city }) => {
 
   return (
     <div className="weather-detail">
-      {console.log(weather)}
       <h2>{name}</h2>
       <h4>{date}</h4>
       <h4>{weatherStatus}</h4>
