@@ -1,51 +1,15 @@
 import React from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+import { fetchWeather, setDay } from "../actions";
 import WeatherDetail from "./WeatherDetail";
 import WeatherList from "./WeatherList";
 
 class WeatherInfo extends React.Component {
-  state = { cityName: "", weatherInformation: null, weatherDayKey: "0" };
-
-  getCity = city => {
-    axios
-      .get(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=818b740e822277fb1688acee53285bde`
-      )
-      .then(response => {
-        const filteredData = this.filterData(response.data);
-        this.setState({ weatherInformation: filteredData });
-        // Send data to parent
-        this.props.getWeatherDay(
-          this.state.weatherInformation.list[this.state.weatherDayKey]
-        );
-      })
-      .catch(error => window.alert(error.response.statusText));
-  };
-
-  // Filtering the data for useful information.
-  filterData = data => {
-    // Reducing the 40 3-hour interval weather information to 6 days.
-    data.list = Object.keys(data.list)
-      .filter(key => key === "0" || key % 8 === 0 || key === "39")
-      .reduce(
-        (object, currentKey, index) => ({
-          ...object,
-          [index]: data.list[currentKey]
-        }),
-        {}
-      );
-    // Changing the date format
-    for (let key in data.list) {
-      if (data.list.hasOwnProperty(key)) {
-        data.list[key].dt = new Date(data.list[key].dt * 1000);
-      }
-    }
-    return data;
-  };
+  state = { cityName: "" };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.getCity(this.state.cityName);
+    this.props.fetchWeather(this.state.cityName);
   };
 
   renderInput = () => {
@@ -75,15 +39,13 @@ class WeatherInfo extends React.Component {
   };
 
   handleClick = key => {
-    this.setState({ weatherDayKey: key });
-    // Send data to parent
-    this.props.getWeatherDay(this.state.weatherInformation.list[key]);
+    this.props.setDay(key);
   };
 
   render() {
     return (
       <div className="weather-info">
-        {!this.state.weatherInformation ? (
+        {!this.props.weather ? (
           <React.Fragment>
             {this.renderIntroduction()}
             {this.renderInput()}
@@ -92,13 +54,11 @@ class WeatherInfo extends React.Component {
           <React.Fragment>
             {this.renderInput()}
             <WeatherDetail
-              weather={
-                this.state.weatherInformation.list[this.state.weatherDayKey]
-              }
-              city={this.state.weatherInformation.city}
+              weather={this.props.weather.list[this.props.day]}
+              city={this.props.weather.city}
             />
             <WeatherList
-              weather={this.state.weatherInformation}
+              weather={this.props.weather}
               onClick={this.handleClick}
             />
           </React.Fragment>
@@ -108,4 +68,11 @@ class WeatherInfo extends React.Component {
   }
 }
 
-export default WeatherInfo;
+const mapStateToProps = state => {
+  return { weather: state.weather, day: state.day };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchWeather, setDay }
+)(WeatherInfo);

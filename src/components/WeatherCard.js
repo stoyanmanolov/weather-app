@@ -1,5 +1,6 @@
 import React from "react";
 import WeatherInfo from "./WeatherInfo";
+import { connect } from "react-redux";
 import Cloudy from "../images/cloudy.jpg";
 import Misty from "../images/misty.jpg";
 import Rainy from "../images/rainy.jpg";
@@ -7,12 +8,6 @@ import Snowy from "../images/snowy.jpg";
 import Sunny from "../images/sunny.jpg";
 
 class WeatherCard extends React.Component {
-  state = { weatherDay: null };
-
-  getWeatherDay = weatherDay => {
-    this.setState({ weatherDay });
-  };
-
   changeImage = weatherDay => {
     // Based on information provided by the API.
     const id = weatherDay.weather[0].id;
@@ -38,18 +33,18 @@ class WeatherCard extends React.Component {
   render() {
     return (
       <div className="weather-card">
-        <WeatherInfo getWeatherDay={this.getWeatherDay} />
-        {this.state.weatherDay ? (
+        <WeatherInfo />
+        {this.props.weather ? (
           <React.Fragment>
             <img
               className="weather-image"
-              src={this.changeImage(this.state.weatherDay)}
+              src={this.changeImage(this.props.weather.list[this.props.day])}
               alt="Weather"
             />
             {/* Hidden duplicate version shown only for larger screens */}
             <img
               className="cardside-image"
-              src={this.changeImage(this.state.weatherDay)}
+              src={this.changeImage(this.props.weather.list[this.props.day])}
               alt="Weather"
             />
           </React.Fragment>
@@ -59,4 +54,8 @@ class WeatherCard extends React.Component {
   }
 }
 
-export default WeatherCard;
+const mapStateToProps = state => {
+  return { weather: state.weather, day: state.day };
+};
+
+export default connect(mapStateToProps)(WeatherCard);
