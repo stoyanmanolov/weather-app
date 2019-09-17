@@ -9,7 +9,7 @@ class WeatherInfo extends React.Component {
   getCity = city => {
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=818b740e822277fb1688acee53285bde`
+        `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
       .then(response => {
         const filteredData = this.filterData(response.data);
