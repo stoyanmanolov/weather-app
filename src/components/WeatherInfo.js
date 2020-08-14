@@ -6,12 +6,12 @@ import WeatherList from "./WeatherList";
 class WeatherInfo extends React.Component {
   state = { cityName: "", weatherInformation: null, weatherDayKey: "0" };
 
-  getCity = city => {
+  getCity = (city) => {
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`
       )
-      .then(response => {
+      .then((response) => {
         const filteredData = this.filterData(response.data);
         this.setState({ weatherInformation: filteredData });
         // Send data to parent
@@ -19,18 +19,18 @@ class WeatherInfo extends React.Component {
           this.state.weatherInformation.list[this.state.weatherDayKey]
         );
       })
-      .catch(error => window.alert(error.response.statusText));
+      .catch((error) => window.alert(error.response.statusText));
   };
 
   // Filtering the data for useful information.
-  filterData = data => {
+  filterData = (data) => {
     // Reducing the 40 3-hour interval weather information to 6 days.
     data.list = Object.keys(data.list)
-      .filter(key => key === "0" || key % 8 === 0 || key === "39")
+      .filter((key) => key === "0" || key % 8 === 0 || key === "39")
       .reduce(
         (object, currentKey, index) => ({
           ...object,
-          [index]: data.list[currentKey]
+          [index]: data.list[currentKey],
         }),
         {}
       );
@@ -43,7 +43,7 @@ class WeatherInfo extends React.Component {
     return data;
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.getCity(this.state.cityName);
   };
@@ -54,7 +54,7 @@ class WeatherInfo extends React.Component {
         <input
           type="text"
           value={this.state.cityName}
-          onChange={e => this.setState({ cityName: e.target.value })}
+          onChange={(e) => this.setState({ cityName: e.target.value })}
         ></input>
         <input type="submit" style={{ display: "none" }}></input>
       </form>
@@ -74,7 +74,7 @@ class WeatherInfo extends React.Component {
     );
   };
 
-  handleClick = key => {
+  handleClick = (key) => {
     this.setState({ weatherDayKey: key });
     // Send data to parent
     this.props.getWeatherDay(this.state.weatherInformation.list[key]);
